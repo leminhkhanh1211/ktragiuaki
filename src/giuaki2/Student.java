@@ -7,13 +7,13 @@ public class Student {
 	private String id;
 	private String name;
 	private String address;
-	private Date dateOfBirthl;
+	private Date dateOfBirth;
 
-	public Student(String id, String name, String address, Date dateOfBirthl) {
+	public Student(String id, String name, String address, Date dateOfBirth) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.dateOfBirthl = dateOfBirthl;
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getId() {
@@ -41,11 +41,11 @@ public class Student {
 	}
 
 	public Date getDateOfBirthl() {
-		return dateOfBirthl;
+		return dateOfBirth;
 	}
 
-	public void setDateOfBirthl(Date dateOfBirthl) {
-		this.dateOfBirthl = dateOfBirthl;
+	public void setDateOfBirthl(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 }
