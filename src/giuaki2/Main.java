@@ -1,10 +1,5 @@
 package giuaki2;
 
-
-
-
-
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,7 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
+
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -64,13 +59,10 @@ public class Main {
 						Date dayOfBirth = new SimpleDateFormat("dd-MM-yyyy").parse(dayOfBirthStr);
 						Student student = new Student(id, name, address, dayOfBirth);
 
-						// Tính toán tuổi
 						int age = calculateAge(student.getDateOfBirthl());
 
-						// Mã hoá tuổi
 						String encodedAge = encodeAge(age);
 
-						// In thông tin mã hoá
 						System.out.println("ID: " + student.getId());
 						System.out.println("Tên: " + student.getName());
 						System.out.println("Tuổi: " + age + " (" + encodedAge + ")");
@@ -96,13 +88,13 @@ public class Main {
 					Element studentElement = (Element) nl.item(i);
 					String dayOfBirthStr = getElementTextContent(studentElement, "dayOfBirth");
 
-					// Tính tổng các chữ số trong ngày tháng năm sinh
+					
 					int sumOfDigits = calculateSumOfDigits(dayOfBirthStr);
 
-					// Kiểm tra xem tổng các chữ số có phải là số nguyên tố không
+					
 					boolean isPrime = isPrime(sumOfDigits);
 
-					// In kết quả kiểm tra
+
 					System.out.println("Ngày sinh: " + dayOfBirthStr);
 					System.out.println("Tổng các chữ số: " + sumOfDigits);
 					System.out.println("Số nguyên tố: " + isPrime);
@@ -111,12 +103,10 @@ public class Main {
 			}
 		});
 
-		// Khởi động các luồng
 		thread1.start();
 		thread2.start();
 		thread3.start();
 
-		// Chờ các luồng hoàn thành
 		try {
 			thread1.join();
 			thread2.join();
@@ -125,7 +115,7 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		// Tạo và ghi thông tin vào file kq.xml
+		
 		taoFileXMLKetQua("kq.xml");
 	}
 
@@ -230,43 +220,36 @@ public class Main {
 				Element studentElement = (Element) nl.item(i);
 				Element studentInfo = doc.createElement("SinhVien");
 
-				// ID
 				String id = studentElement.getAttribute("id");
 				Element idElement = doc.createElement("ID");
 				idElement.appendChild(doc.createTextNode(id));
 				studentInfo.appendChild(idElement);
 
-				// Tên
 				String name = getElementTextContent(studentElement, "name");
 				Element nameElement = doc.createElement("Ten");
 				nameElement.appendChild(doc.createTextNode(name));
 				studentInfo.appendChild(nameElement);
 
-				// Địa chỉ
 				String address = getElementTextContent(studentElement, "address");
 				Element addressElement = doc.createElement("DiaChi");
 				addressElement.appendChild(doc.createTextNode(address));
 				studentInfo.appendChild(addressElement);
 
-				// Ngày sinh
 				String dayOfBirth = getElementTextContent(studentElement, "dayOfBirth");
 				Element dobElement = doc.createElement("NgaySinh");
 				dobElement.appendChild(doc.createTextNode(dayOfBirth));
 				studentInfo.appendChild(dobElement);
 
-				// Tuổi
 				String age = calculateAge(new SimpleDateFormat("dd-MM-yyyy").parse(dayOfBirth)) + "";
 				Element ageElement = doc.createElement("Tuoi");
 				ageElement.appendChild(doc.createTextNode(age));
 				studentInfo.appendChild(ageElement);
 
-				// Tổng chữ số
 				int sumOfDigits = calculateSumOfDigits(dayOfBirth);
 				Element sumElement = doc.createElement("TongChuSo");
 				sumElement.appendChild(doc.createTextNode(sumOfDigits + ""));
 				studentInfo.appendChild(sumElement);
 
-				// Số nguyên tố
 				boolean isPrime = isPrime(sumOfDigits);
 				Element primeElement = doc.createElement("SoNguyenTo");
 				primeElement.appendChild(doc.createTextNode(isPrime + ""));
